@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cassie Phan — Personal Website</title>
+  <meta name="description" content="Cassie Phan — Software Engineer, WashU CS 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Unbounded:wght@400;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="cover">
+  <div class="topbar">
+    <span class="topbar-left">CP</span>
+    <div class="topbar-right">
+      <a href="#about" class="topbar-link">ABOUT</a>
+      <a href="#experience" class="topbar-link">EXPERIENCE</a>
+      <a href="#closer" class="topbar-link">CONTACT</a>
+    </div>
+  </div>
+
+  <div class="cover-body">
+    <span class="plus" style="top:18px;left:38px;">+</span>
+
+    <div>
+      <div class="cover-name-outline">Cassie</div>
+      <div class="cover-name-filled">Phan.</div>
+      <div class="cover-italic">— software engineer, builder, matcha lover</div>
+    </div>
+
+    <div class="cover-chips-row">
+      <span class="chip blue dot">CS @ WashU · 2026</span>
+      <span class="chip green dot">Rewriting the Code Member</span>
+      <span class="chip orange dot">Grace Hopper 2025</span>
+    </div>
+
+    <!-- <div class="cover-info-box">
+      <div class="cover-info-box-label">Cassie Phan</div>
+      <div class="cover-info-box-title">Software Engineer · CS Student</div>
+      <p>Passionate about building things that feel great, from backend APIs to polished UIs.</p>
+    </div> -->
+
+    <div class="cover-bottom">
+      <div class="folder-section" style="padding-left:0;padding-right:0;">
+        <div class="folder-tabs">
+          <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
+          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
+          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
+          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
+        </div>
+        <div class="folder-band" style="background:var(--tab-green);">
+          <span class="folder-band-text">cassie phan · personal website</span>
+          <span class="folder-band-year">2025–2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="about-body">
+    <span class="plus" style="top:18px;left:38px;">+</span>
+
+    <div class="about-heading-area">
+      <div class="display-heading" style="font-size:clamp(52px,10vw,108px);">
+        <span class="outline-text">About</span><br>Me.
+      </div>
+      <!-- <div class="about-heading-italic">— the person behind the code</div> -->
+    </div>
+
+    <div class="about-grid">
+      <div>
+        <div class="about-photo">
+          <img src="headshot.JPG" alt="Cassie Phan">
+        </div>
+      </div>
+
+      <div class="about-right">
+        <div class="about-hi">Hi, I'm <em>Cassie Phan!</em></div>
+
+        <div class="about-chips">
+          <span class="chip blue dot">Software Engineer</span>
+          <span class="chip green dot">CS student</span>
+        </div>
+
+        <p class="about-bio">
+          I'm a <strong>Computer Science student at Washington University in St. Louis</strong>,
+          graduating May 2026. I am broadly interested in software engineering across the full stack,
+          with a focus on backend systems, APIs, and cloud-powered infrastructure that support
+          scalable applications.
+        </p>
+        <p class="about-bio">
+          My experience spans collaborative software projects, cloud services, and automation
+          work built to make systems more reliable and easier to use. I enjoy solving problems
+          with clean architecture, thoughtful APIs, and tools that help teams move faster.
+        </p>
+        <p class="about-bio">
+          Off-screen: I love collecting stickers and trying new matcha cafes!
+        </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-bottom">
+      <div class="folder-section" style="padding-left:0;padding-right:0;">
+        <div class="folder-tabs">
+          <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
+          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
+          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
+          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
+        </div>
+        <div class="folder-band" style="background:var(--tab-green);">
+          <span class="folder-band-text" style="color:rgba(0,0,80,0.42);">passions &amp; background · cassie phan</span>
+          <span class="folder-band-year" style="color:rgba(0,0,80,0.3);">2025–2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="exp-body">
+    <span class="plus" style="top:18px;left:38px;opacity:0.15;">+</span>
+
+    <div class="exp-heading">
+      <span class="outline-text">Work</span><br>
+      Experience.
+    </div>
+
+    <div class="exp-entries">
+
+      <div class="exp-entry">
+        <div class="exp-num-bg">01</div>
+        <div class="exp-left">
+          <div class="exp-company">Capital One</div>
+          <div class="exp-date">Jun – Aug 2025<br>Richmond, VA</div>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:5px;">
+            <span class="chip blue">Internship</span>
+            <span class="chip">SWE</span>
+          </div>
+        </div>
+        <div>
+          <div class="exp-role">Software Engineer Intern</div>
+          <ul class="exp-bullets">
+            <li>Scaled event monitoring from <strong>1 → 100+ simultaneous event statuses</strong> for 40+ internal engineering teams — built a Vue.js UI tile displaying real-time run, failure, and processing timestamps.</li>
+            <li>Developed a <strong>TypeScript REST API</strong> with a full repository layer to retrieve event lifecycle data, enabling end-to-end connectivity between backend and the monitoring UI.</li>
+            <li>Boosted <strong>speed-to-market by 30%</strong> by integrating AWS Lambda to bridge the REST API and Vue.js frontend.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="chip blue">Vue.js</span>
+            <span class="chip">TypeScript</span>
+            <span class="chip orange">AWS Lambda</span>
+            <span class="chip">REST API</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-num-bg">02</div>
+        <div class="exp-left">
+          <div class="exp-company">WashU School of Medicine</div>
+          <div class="exp-date">Apr 2024 – May 2025<br>St. Louis, MO</div>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:5px;">
+            <span class="chip green">Research</span>
+            <span class="chip blue">Internship</span>
+            <span class="chip">SWE</span>
+          </div>
+        </div>
+        <div>
+          <div class="exp-role">Undergraduate Research Assistant</div>
+          <ul class="exp-bullets">
+            <li>Reduced plotting time by <strong>80%</strong> and improved scalability of protein site analysis for 5,000+ CDK13 gene alleles via Python automation in Unix/Linux.</li>
+            <li>Built <strong>R-based visualizations</strong> analyzing CDK13 variant distributions across 15 studies, streamlining data retrieval for 10+ researchers.</li>
+          </ul>
+          <div class="exp-tags">
+            <span class="chip green">Python</span>
+            <span class="chip">R</span>
+            <span class="chip">Unix / Linux</span>
+            <span class="chip yellow">Data Viz</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="exp-bottom">
+      <div class="folder-section" style="padding-left:0;padding-right:0;">
+        <div class="folder-tabs">
+          <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
+          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
+          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
+          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
+        </div>
+        <div class="folder-band" style="background:var(--tab-green);">
+          <span class="folder-band-text" style="color:rgba(0,0,80,0.42);">work experience · internships &amp; research</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="closer">
+  <div class="closer-body">
+    <span class="plus" style="top:18px;left:38px;">+</span>
+
+    <div style="position:relative;z-index:1;flex:1;display:flex;flex-direction:column;">
+      <div class="closer-top">
+        <div>
+          <div class="closer-heading">
+            <span class="outline-text">Let's</span><br>
+            <span class="accent">Connect.</span>
+          </div>
+        </div>
+        <div>
+          <div class="closer-side-label">About this portfolio</div>
+          <p class="closer-side-text">
+           Let's work together!
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;">
+            <span class="chip blue dot">Full-stack SWE</span>
+            <span class="chip yellow dot">Starting Jun 2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <a href="mailto:cassiephan.wk@gmail.com" class="contact-card">
+          <div class="contact-type">Email</div>
+          <div class="contact-value">cassiephan.wk@gmail.com</div>
+          <div class="contact-arrow">→</div>
+        </a>
+        <a href="https://linkedin.com/in/cassie-phan" target="_blank" class="contact-card">
+          <div class="contact-type">LinkedIn</div>
+          <div class="contact-value">linkedin.com/in/cassie-phan</div>
+          <div class="contact-arrow">→</div>
+        </a>
+        <a href="tel:6232825096" class="contact-card">
+          <div class="contact-type">Phone</div>
+          <div class="contact-value">623-282-5096</div>
+          <div class="contact-arrow">→</div>
+        </a>
+      </div>
+
+      <div class="closer-footer-strip">
+        <div class="closer-footer-name">Cassie Phan.</div>
+        <div class="closer-footer-meta">
+          Washington University in St. Louis<br>
+          B.S. Computer Science · Expected May 2026<br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="closer-bottom">
+    <div class="folder-tabs">
+      <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
+          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
+          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
+          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
+        </div>
+        <div class="folder-band" style="background:var(--tab-green);">
+      <span class="folder-band-text">cassie phan · cassiephan.wk@gmail.com</span>
+      <span class="folder-band-year">2025–2026</span>
+    </div>
+  </div>
+</section>
+
+<script>
+// Expand/collapse experience entries
+document.querySelectorAll('.exp-role').forEach(role => {
+  role.addEventListener('click', () => {
+    role.closest('.exp-entry').classList.toggle('expanded');
+  });
+});
+
+// Track active section and update tabs
+const tabs = document.querySelectorAll('.folder-tab');
+const sections = document.querySelectorAll('section[id]');
+
+function updateActiveTabs() {
+  let currentSection = null;
+  let closestDistance = Infinity;
+  
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    const distance = Math.abs(rect.top);
+    if (distance < closestDistance && rect.top < window.innerHeight / 2) {
+      closestDistance = distance;
+      currentSection = section.id;
+    }
+  });
+  
+  tabs.forEach(tab => {
+    if (tab.dataset.section === currentSection) {
+      tab.classList.add('active');
+    } else {
+      tab.classList.remove('active');
+    }
+  });
+}
+
+// Update on scroll
+window.addEventListener('scroll', updateActiveTabs);
+
+// Make tabs clickable
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const sectionId = tab.dataset.section;
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
