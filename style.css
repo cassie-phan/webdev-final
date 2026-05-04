@@ -12,6 +12,8 @@
     /* Page + cards: longer ease-in-out reads smoother than short linear snaps */
     --theme-blend-duration: 1.15s;
     --theme-blend-ease: cubic-bezier(0.48, 0.06, 0.32, 0.99);
+    /* Inactive section text/UI: 0 = fully faded out; small value (e.g. 0.15) = faint peek */
+    --section-content-dim: 0;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -110,6 +112,30 @@ body.theme-closer {
     box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95) inset,
         0 16px 44px rgba(25, 22, 18, 0.1);
+}
+
+/* Inner content fully fades out / in with the same curve as the card / body */
+.cover-body,
+.about-body,
+.exp-body,
+.closer-body {
+    transition: opacity var(--theme-blend-duration) var(--theme-blend-ease);
+}
+
+.site-section--inactive > .file-view > .cover-body,
+.site-section--inactive > .file-view > .about-body,
+.site-section--inactive > .file-view > .exp-body,
+.site-section--inactive > .file-view > .closer-body {
+    opacity: var(--section-content-dim);
+    pointer-events: none;
+}
+
+.site-section--active > .file-view > .cover-body,
+.site-section--active > .file-view > .about-body,
+.site-section--active > .file-view > .exp-body,
+.site-section--active > .file-view > .closer-body {
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .file-view--animate {
@@ -283,10 +309,13 @@ body.theme-closer {
     font-weight: 900;
     line-height: 0.9;
     letter-spacing: -0.03em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 .outline-text {
     -webkit-text-stroke: 2px var(--ink);
     color: transparent;
+    -webkit-font-smoothing: antialiased;
 }
 
 /* Hollow display type: solid fill on the active card only (transparent + compositing can show page green as “stripes”) */
@@ -306,8 +335,18 @@ body.theme-closer {
     flex: 1;
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
     padding: 52px 40px 0;
     position: relative;
+    text-align: left;
+}
+
+.cover-hero {
+    width: 100%;
+    max-width: 920px;
+    text-align: left;
 }
 
 .cover-label {
@@ -336,6 +375,10 @@ body.theme-closer {
     letter-spacing: -0.03em;
     -webkit-text-stroke: 2px var(--ink);
     color: transparent;
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    text-align: left;
 }
 
 #cover.site-section--active .cover-name-outline {
@@ -348,6 +391,7 @@ body.theme-closer {
     line-height: 0.88;
     letter-spacing: -0.03em;
     color: var(--ink);
+    text-align: left;
 }
 .cover-italic {
     font-family: 'IBM Plex Mono', monospace;
@@ -355,12 +399,16 @@ body.theme-closer {
     font-size: clamp(14px, 2vw, 22px);
     color: var(--tab-blue);
     margin-top: 14px;
+    text-align: left;
 }
 .cover-chips-row {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
     margin-top: 26px;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 920px;
 }
 
 .cover-info-box {
@@ -397,7 +445,9 @@ body.theme-closer {
       display: none;
 }
 
-.cover-bottom { margin-top: auto; }
+.cover-bottom {
+    margin-top: auto;
+}
 
 
 /* ══════════════════════════════════
@@ -697,6 +747,8 @@ body.theme-closer {
     line-height: 0.9;
     letter-spacing: -0.03em;
     margin-bottom: 46px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .exp-entries {
@@ -709,8 +761,19 @@ body.theme-closer {
     padding: 28px 0;
     border-top: 1px solid #D8D6CF;
     position: relative;
+    --exp-role-pad-x: 16px;
+    --exp-watermark-gutter: 2.75rem; /* right column inset so “01” doesn’t sit on the title pill */
 }
 .exp-left { padding-right: 24px; }
+
+/* Role column: same left/right inset as title pill so dates & bullets line up */
+.exp-entry > div:last-child {
+    text-align: left;
+    min-width: 0;
+    position: relative;
+    z-index: 1;
+    padding-right: var(--exp-watermark-gutter);
+}
 .exp-company {
     font-family: 'Unbounded', sans-serif;
     font-weight: 700;
@@ -734,11 +797,20 @@ body.theme-closer {
     margin-bottom: 0;
     cursor: pointer;
     transition: color 0.2s, background-color 0.2s;
-    padding: 10px 16px;
+    padding: 10px var(--exp-role-pad-x);
     border-radius: 12px;
     display: inline-block;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+    vertical-align: top;
 }
 .exp-role:hover {
+    color: var(--tab-blue);
+    background-color: rgba(74, 122, 212, 0.12);
+}
+
+.exp-entry.expanded .exp-role {
     color: var(--tab-blue);
     background-color: rgba(74, 122, 212, 0.12);
 }
@@ -748,6 +820,8 @@ body.theme-closer {
     overflow: hidden;
     transition: opacity 0.35s ease, max-height 0.4s ease;
     margin-top: 0;
+    padding-left: var(--exp-role-pad-x);
+    box-sizing: border-box;
 }
 .exp-expand .exp-date {
     margin-bottom: 16px;
@@ -791,12 +865,14 @@ body.theme-closer {
 .exp-num-bg {
     position: absolute;
     top: 18px; right: 0;
+    z-index: 0;
     font-family: 'Unbounded', sans-serif;
     font-size: 52px;
     font-weight: 900;
     color: rgba(0,0,0,0.04);
     line-height: 1;
     user-select: none;
+    pointer-events: none;
 }
 
 .exp-bottom { margin-top: auto; padding-top: 20px; }
@@ -846,6 +922,8 @@ body.theme-closer {
     font-size: clamp(50px, 9vw, 98px);
     line-height: 0.9;
     letter-spacing: -0.03em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 .closer-heading .accent { color: var(--tab-green); }
 
