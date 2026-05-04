@@ -9,20 +9,26 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Unbounded:wght@400;700;900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
-<body>
+<body class="theme-cover">
 
-<section id="cover">
-  <div class="topbar">
-    <span class="topbar-left">CP</span>
-    <div class="topbar-right">
-      <a href="#about" class="topbar-link">ABOUT</a>
-      <a href="#experience" class="topbar-link">EXPERIENCE</a>
-      <a href="#closer" class="topbar-link">CONTACT</a>
+<nav class="site-nav" id="site-nav" aria-label="Site navigation">
+  <div class="site-nav-inner">
+    <a class="site-nav-brand" href="#cover">Cassie Phan</a>
+    <div class="site-nav-tabs" role="tablist" aria-label="Jump to section">
+      <button type="button" class="nav-tab active" role="tab" aria-selected="true" id="nav-tab-cover" data-target="cover" style="background:var(--tab-green);">Home</button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" id="nav-tab-about" data-target="about" style="background:var(--tab-blue);">About</button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" id="nav-tab-experience" data-target="experience" style="background:var(--tab-yellow);">Experience</button>
+      <button type="button" class="nav-tab" role="tab" aria-selected="false" id="nav-tab-closer" data-target="closer" style="background:var(--tab-orange);">Contact</button>
     </div>
   </div>
+</nav>
 
+<main id="site-main" class="site-main">
+
+<section id="cover" class="site-section" data-theme="cover">
+  <div class="file-view">
   <div class="cover-body">
     <span class="plus" style="top:18px;left:38px;">+</span>
 
@@ -38,30 +44,13 @@
       <span class="chip orange dot">Grace Hopper 2025</span>
     </div>
 
-    <!-- <div class="cover-info-box">
-      <div class="cover-info-box-label">Cassie Phan</div>
-      <div class="cover-info-box-title">Software Engineer · CS Student</div>
-      <p>Passionate about building things that feel great, from backend APIs to polished UIs.</p>
-    </div> -->
-
-    <div class="cover-bottom">
-      <div class="folder-section" style="padding-left:0;padding-right:0;">
-        <div class="folder-tabs">
-          <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
-          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
-          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
-          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
-        </div>
-        <div class="folder-band" style="background:var(--tab-green);">
-          <span class="folder-band-text">cassie phan · personal website</span>
-          <span class="folder-band-year">2025–2026</span>
-        </div>
-      </div>
-    </div>
+    <div class="cover-bottom" aria-hidden="true"></div>
+  </div>
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="site-section" data-theme="about">
+  <div class="file-view">
   <div class="about-body">
     <span class="plus" style="top:18px;left:38px;">+</span>
 
@@ -69,7 +58,6 @@
       <div class="display-heading" style="font-size:clamp(52px,10vw,108px);">
         <span class="outline-text">About</span><br>Me.
       </div>
-      <!-- <div class="about-heading-italic">— the person behind the code</div> -->
     </div>
 
     <div class="about-grid">
@@ -101,28 +89,15 @@
         <p class="about-bio">
           Off-screen: I love collecting stickers and trying new matcha cafes!
         </p>
-        </div>
       </div>
     </div>
 
-    <div class="about-bottom">
-      <div class="folder-section" style="padding-left:0;padding-right:0;">
-        <div class="folder-tabs">
-          <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
-          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
-          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
-          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
-        </div>
-        <div class="folder-band" style="background:var(--tab-green);">
-          <span class="folder-band-text" style="color:rgba(0,0,80,0.42);">passions &amp; background · cassie phan</span>
-          <span class="folder-band-year" style="color:rgba(0,0,80,0.3);">2025–2026</span>
-        </div>
-      </div>
-    </div>
+  </div>
   </div>
 </section>
 
-<section id="experience">
+<section id="experience" class="site-section" data-theme="experience">
+  <div class="file-view">
   <div class="exp-body">
     <span class="plus" style="top:18px;left:38px;opacity:0.15;">+</span>
 
@@ -137,15 +112,16 @@
         <div class="exp-num-bg">01</div>
         <div class="exp-left">
           <div class="exp-company">Capital One</div>
-          <div class="exp-date">Jun – Aug 2025<br>Richmond, VA</div>
           <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:5px;">
             <span class="chip blue">Internship</span>
             <span class="chip">SWE</span>
           </div>
         </div>
         <div>
-          <div class="exp-role">Software Engineer Intern</div>
-          <ul class="exp-bullets">
+          <div class="exp-role" role="button" tabindex="0" aria-expanded="false">Software Engineer Intern</div>
+          <div class="exp-expand">
+            <div class="exp-date">Jun – Aug 2025 · Richmond, VA</div>
+            <ul class="exp-bullets">
             <li>Scaled event monitoring from <strong>1 → 100+ simultaneous event statuses</strong> for 40+ internal engineering teams — built a Vue.js UI tile displaying real-time run, failure, and processing timestamps.</li>
             <li>Developed a <strong>TypeScript REST API</strong> with a full repository layer to retrieve event lifecycle data, enabling end-to-end connectivity between backend and the monitoring UI.</li>
             <li>Boosted <strong>speed-to-market by 30%</strong> by integrating AWS Lambda to bridge the REST API and Vue.js frontend.</li>
@@ -156,6 +132,7 @@
             <span class="chip orange">AWS Lambda</span>
             <span class="chip">REST API</span>
           </div>
+          </div>
         </div>
       </div>
 
@@ -163,16 +140,16 @@
         <div class="exp-num-bg">02</div>
         <div class="exp-left">
           <div class="exp-company">WashU School of Medicine</div>
-          <div class="exp-date">Apr 2024 – May 2025<br>St. Louis, MO</div>
           <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:5px;">
             <span class="chip green">Research</span>
             <span class="chip blue">Internship</span>
-            <span class="chip">SWE</span>
           </div>
         </div>
         <div>
-          <div class="exp-role">Undergraduate Research Assistant</div>
-          <ul class="exp-bullets">
+          <div class="exp-role" role="button" tabindex="0" aria-expanded="false">Undergraduate Research Assistant</div>
+          <div class="exp-expand">
+            <div class="exp-date">Apr 2024 – May 2025 · St. Louis, MO</div>
+            <ul class="exp-bullets">
             <li>Reduced plotting time by <strong>80%</strong> and improved scalability of protein site analysis for 5,000+ CDK13 gene alleles via Python automation in Unix/Linux.</li>
             <li>Built <strong>R-based visualizations</strong> analyzing CDK13 variant distributions across 15 studies, streamlining data retrieval for 10+ researchers.</li>
           </ul>
@@ -182,28 +159,34 @@
             <span class="chip">Unix / Linux</span>
             <span class="chip yellow">Data Viz</span>
           </div>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div class="exp-bottom">
-      <div class="folder-section" style="padding-left:0;padding-right:0;">
-        <div class="folder-tabs">
-          <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
-          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
-          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
-          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
-        </div>
-        <div class="folder-band" style="background:var(--tab-green);">
-          <span class="folder-band-text" style="color:rgba(0,0,80,0.42);">work experience · internships &amp; research</span>
-        </div>
+    <div class="github-projects" id="github-projects">
+      <div class="github-projects-header">
+        <h3 class="github-projects-title">Repositories</h3>
+        <p class="github-projects-sub">
+          Recent public work pulled live from the <strong>GitHub REST API</strong>
+          (<code>GET /users/{user}/repos</code>).
+        </p>
       </div>
+      <div id="github-repo-list" class="repo-list" aria-live="polite" aria-busy="true">
+        <p class="repo-list-status">Loading repositories…</p>
+      </div>
+      <p class="github-projects-footer">
+        <a id="github-profile-link" href="https://github.com/cassie-phan" target="_blank" rel="noopener noreferrer">View profile on GitHub →</a>
+      </p>
     </div>
+
+  </div>
   </div>
 </section>
 
-<section id="closer">
+<section id="closer" class="site-section" data-theme="closer">
+  <div class="file-view">
   <div class="closer-body">
     <span class="plus" style="top:18px;left:38px;">+</span>
 
@@ -216,7 +199,6 @@
           </div>
         </div>
         <div>
-          <div class="closer-side-label">About this portfolio</div>
           <p class="closer-side-text">
            Let's work together!
           </p>
@@ -254,68 +236,225 @@
       </div>
     </div>
   </div>
-
-  <div class="closer-bottom">
-    <div class="folder-tabs">
-      <div class="folder-tab active" data-section="cover" style="background:var(--tab-green);">Home</div>
-          <div class="folder-tab" data-section="about" style="background:var(--tab-blue);">About</div>
-          <div class="folder-tab" data-section="experience" style="background:var(--tab-yellow);color:#5a4200;">Experience</div>
-          <div class="folder-tab" data-section="closer" style="background:var(--tab-orange);">Contact</div>
-        </div>
-        <div class="folder-band" style="background:var(--tab-green);">
-      <span class="folder-band-text">cassie phan · cassiephan.wk@gmail.com</span>
-      <span class="folder-band-year">2025–2026</span>
-    </div>
   </div>
 </section>
 
+</main>
+
 <script>
-// Expand/collapse experience entries
 document.querySelectorAll('.exp-role').forEach(role => {
   role.addEventListener('click', () => {
-    role.closest('.exp-entry').classList.toggle('expanded');
+    const entry = role.closest('.exp-entry');
+    const open = entry.classList.toggle('expanded');
+    role.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  role.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      role.click();
+    }
   });
 });
 
-// Track active section and update tabs
-const tabs = document.querySelectorAll('.folder-tab');
-const sections = document.querySelectorAll('section[id]');
+const SECTION_IDS = ['cover', 'about', 'experience', 'closer'];
+const THEME_CLASS = {
+  cover: 'theme-cover',
+  about: 'theme-about',
+  experience: 'theme-experience',
+  closer: 'theme-closer',
+};
 
-function updateActiveTabs() {
-  let currentSection = null;
-  let closestDistance = Infinity;
-  
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    const distance = Math.abs(rect.top);
-    if (distance < closestDistance && rect.top < window.innerHeight / 2) {
-      closestDistance = distance;
-      currentSection = section.id;
-    }
-  });
-  
-  tabs.forEach(tab => {
-    if (tab.dataset.section === currentSection) {
-      tab.classList.add('active');
-    } else {
-      tab.classList.remove('active');
-    }
+const sections = SECTION_IDS.map(id => document.getElementById(id)).filter(Boolean);
+const tabButtons = document.querySelectorAll('.nav-tab');
+const bodyEl = document.body;
+
+function setBodyTheme(sectionId) {
+  const cls = THEME_CLASS[sectionId];
+  if (!cls) return;
+  Object.values(THEME_CLASS).forEach(c => bodyEl.classList.remove(c));
+  bodyEl.classList.add(cls);
+}
+
+function setActiveTab(sectionId) {
+  tabButtons.forEach(btn => {
+    const on = btn.dataset.target === sectionId;
+    btn.classList.toggle('active', on);
+    btn.setAttribute('aria-selected', on ? 'true' : 'false');
   });
 }
 
-// Update on scroll
-window.addEventListener('scroll', updateActiveTabs);
+function setSectionActiveState(sectionId) {
+  sections.forEach((sec) => {
+    const on = sec.id === sectionId;
+    sec.classList.toggle('site-section--active', on);
+    sec.classList.toggle('site-section--inactive', !on);
+  });
+}
 
-// Make tabs clickable
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const sectionId = tab.dataset.section;
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
+function syncFromSectionId(sectionId) {
+  if (!SECTION_IDS.includes(sectionId)) return;
+  setBodyTheme(sectionId);
+  setActiveTab(sectionId);
+  setSectionActiveState(sectionId);
+}
+
+let ioRaf = null;
+let ioPendingSectionId = null;
+
+const io = new IntersectionObserver(
+  (entries) => {
+    const candidates = entries.filter(e => e.isIntersecting);
+    if (!candidates.length) return;
+    candidates.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+    const id = candidates[0].target.id;
+    ioPendingSectionId = id;
+    if (ioRaf != null) return;
+    ioRaf = requestAnimationFrame(() => {
+      ioRaf = null;
+      const next = ioPendingSectionId;
+      ioPendingSectionId = null;
+      if (next && SECTION_IDS.includes(next)) syncFromSectionId(next);
+    });
+  },
+  { root: null, rootMargin: '-38% 0px -38% 0px', threshold: [0, 0.15, 0.35, 0.55, 0.75, 1] }
+);
+
+sections.forEach(sec => io.observe(sec));
+setSectionActiveState('cover');
+
+function triggerFileOpen(sectionId) {
+  const sec = document.getElementById(sectionId);
+  const fv = sec && sec.querySelector('.file-view');
+  if (!fv) return;
+  fv.classList.remove('file-view--animate');
+  void fv.offsetWidth;
+  fv.classList.add('file-view--animate');
+}
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.target;
+    if (!SECTION_IDS.includes(id)) return;
+    triggerFileOpen(id);
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + id);
     }
   });
 });
+
+document.querySelector('.site-nav-brand').addEventListener('click', (e) => {
+  e.preventDefault();
+  triggerFileOpen('cover');
+  document.getElementById('cover').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (history.replaceState) history.replaceState(null, '', '#cover');
+});
+
+function scrollToHash(instant) {
+  const raw = location.hash.replace(/^#/, '');
+  if (!SECTION_IDS.includes(raw)) return;
+  const el = document.getElementById(raw);
+  if (!el) return;
+  el.scrollIntoView({ behavior: instant ? 'auto' : 'smooth', block: 'start' });
+  syncFromSectionId(raw);
+}
+
+window.addEventListener('hashchange', () => scrollToHash(false));
+
+requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
+    if (location.hash && SECTION_IDS.includes(location.hash.replace(/^#/, ''))) {
+      scrollToHash(true);
+    }
+  });
+});
+
+const GITHUB_USERNAME = 'cassie-phan';
+const REPO_LIST_EL = document.getElementById('github-repo-list');
+const GITHUB_PROFILE_LINK = document.getElementById('github-profile-link');
+
+if (GITHUB_PROFILE_LINK) {
+  GITHUB_PROFILE_LINK.href = `https://github.com/${GITHUB_USERNAME}`;
+}
+
+function escapeHtml(s) {
+  const div = document.createElement('div');
+  div.textContent = s;
+  return div.innerHTML;
+}
+
+async function loadGithubRepos() {
+  if (!REPO_LIST_EL) return;
+  const apiUrl = `https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}/repos?per_page=6&sort=updated`;
+
+  try {
+    const response = await fetch(apiUrl, {
+      headers: { Accept: 'application/vnd.github+json' },
+    });
+
+    if (response.status === 403) {
+      throw new Error('rate limit');
+    }
+
+    if (!response.ok) {
+      throw new Error(`GitHub returned ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (!Array.isArray(data)) {
+      throw new Error('unexpected payload');
+    }
+
+    const notArchived = data.filter((r) => !r.archived);
+    let picked = notArchived.filter((r) => !r.fork).slice(0, 3);
+    if (!picked.length && notArchived.length) {
+      picked = notArchived.slice(0, 3);
+    }
+
+    REPO_LIST_EL.setAttribute('aria-busy', 'false');
+
+    if (!picked.length) {
+      REPO_LIST_EL.innerHTML =
+        '<p class="repo-list-status">No public repositories for this username. Set <code class="inline-code">GITHUB_USERNAME</code> in <code class="inline-code">index.html</code> to match your GitHub profile exactly (<strong>cassiephan</strong> and <strong>cassie-phan</strong> are different accounts).</p>';
+      return;
+    }
+
+    REPO_LIST_EL.innerHTML = picked
+      .map((repo) => {
+        const desc = repo.description
+          ? escapeHtml(repo.description)
+          : '<span class="repo-no-desc">No description</span>';
+        const lang = repo.language
+          ? `<span class="chip">${escapeHtml(repo.language)}</span>`
+          : '';
+        const stars =
+          repo.stargazers_count > 0
+            ? `<span class="repo-stars" aria-label="${repo.stargazers_count} stars">★ ${repo.stargazers_count}</span>`
+            : '';
+        const forkBadge = repo.fork
+          ? '<span class="chip repo-fork-badge">Fork</span>'
+          : '';
+
+        return `
+          <article class="repo-card">
+            <div class="repo-card-top">
+              <a class="repo-name" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name)}</a>
+              ${stars}
+            </div>
+            <p class="repo-desc">${desc}</p>
+            <div class="repo-card-meta">${forkBadge}${lang}</div>
+          </article>
+        `;
+      })
+      .join('');
+  } catch {
+    REPO_LIST_EL.setAttribute('aria-busy', 'false');
+    REPO_LIST_EL.innerHTML =
+      '<p class="repo-list-error" role="alert">Could not load repositories from GitHub. If you opened this file directly (<code class="inline-code">file://</code>), use a local server or GitHub Pages instead — browsers block many API calls from file URLs.</p>';
+  }
+}
+
+loadGithubRepos();
 </script>
 
 </body>

@@ -1,13 +1,17 @@
 :root {
-    --white: #F8F7F3;
+    --site-nav-h: 92px;
+    --white: #f7f6f2;
     --ink: #1C1C1A;
     --gray: #9A9990;
     --tab-red: #E05555;
-    --tab-blue: #4A7FD4;
-    --tab-green: #5BAD6F;
-    --tab-yellow: #E8C84A;
-    --tab-orange: #E07A3A;
+    --tab-blue: #5b84d1;
+    --tab-green: #6fa66f;
+    --tab-yellow: #e9cc65;
+    --tab-orange: #d98551;
     --tab-purple: #8B72D4;
+    /* Page + cards: longer ease-in-out reads smoother than short linear snaps */
+    --theme-blend-duration: 1.15s;
+    --theme-blend-ease: cubic-bezier(0.48, 0.06, 0.32, 0.99);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -15,10 +19,161 @@ html { scroll-behavior: smooth; }
 
 body {
     font-family: 'Space Grotesk', sans-serif;
-    background: var(--white);
     color: var(--ink);
     overflow-x: hidden;
     margin: 0;
+    padding-top: var(--site-nav-h);
+    padding-bottom: 40px;
+    transition: background-color var(--theme-blend-duration) var(--theme-blend-ease);
+}
+
+body.theme-cover {
+    background-color: var(--tab-green);
+    --theme-chrome: var(--tab-green);
+}
+body.theme-about {
+    background-color: var(--tab-blue);
+    --theme-chrome: var(--tab-blue);
+}
+body.theme-experience {
+    background-color: var(--tab-yellow);
+    --theme-chrome: var(--tab-yellow);
+}
+body.theme-closer {
+    background-color: var(--tab-orange);
+    --theme-chrome: var(--tab-orange);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --theme-blend-duration: 0.16s;
+        --theme-blend-ease: ease;
+    }
+    html { scroll-behavior: auto; }
+    .file-view--animate {
+        animation: none;
+    }
+}
+
+.site-main {
+    display: block;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 4px 20px 0;
+}
+
+.site-section {
+    scroll-margin-top: calc(var(--site-nav-h) + 12px);
+    display: flex;
+    flex-direction: column;
+}
+
+.site-section > .file-view {
+    flex: 1;
+    width: 100%;
+}
+
+.site-section + .site-section {
+    margin-top: 8px;
+}
+
+.file-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fdfcfa;
+    border: 1.5px solid rgba(255, 255, 255, 0.65);
+    border-radius: 20px;
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.95) inset,
+        0 16px 44px rgba(25, 22, 18, 0.1);
+    overflow: hidden;
+    min-height: calc(100svh - var(--site-nav-h) - 40px);
+    /* background-color only (not shorthand) — smoother cross-fade with less banding than “background” */
+    transition:
+        background-color var(--theme-blend-duration) var(--theme-blend-ease),
+        box-shadow var(--theme-blend-duration) var(--theme-blend-ease),
+        border-color var(--theme-blend-duration) var(--theme-blend-ease);
+}
+
+/* Non-active sections: card reads as page background */
+.site-section--inactive > .file-view {
+    background-color: var(--theme-chrome);
+    border-color: transparent;
+    box-shadow: none;
+}
+
+/* Active card: solid cream */
+.site-section--active > .file-view {
+    background-color: #fdfcfa;
+    border-color: rgba(255, 255, 255, 0.65);
+    box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.95) inset,
+        0 16px 44px rgba(25, 22, 18, 0.1);
+}
+
+.file-view--animate {
+    animation: file-open 0.58s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes file-open {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.992);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    padding: 10px 20px 0;
+    padding-top: calc(10px + env(safe-area-inset-top, 0));
+    background: #ebe9e4;
+    border-bottom: 1px solid rgba(45, 42, 38, 0.1);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+
+.site-nav-inner {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 20px;
+    flex-wrap: wrap;
+    padding-bottom: 0;
+}
+
+.site-nav-brand {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(16px, 2.5vw, 20px);
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    padding-bottom: 10px;
+    line-height: 1.2;
+}
+
+.site-nav-brand:hover {
+    opacity: 0.85;
+}
+
+.site-nav-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 4px;
+    position: relative;
+    z-index: 2;
 }
 
 .mono { font-family: 'IBM Plex Mono', monospace; }
@@ -60,102 +215,66 @@ body {
     background: currentColor;
 }
 
-.folder-tabs {
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    margin-bottom: -14px;
-    position: relative;
-    z-index: 20;
-}
-
-.folder-tab {
-    padding: 7px 16px;
-    border-radius: 10px 10px 0 0;
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    color: #fff;
-    cursor: pointer;
-    position: relative;
-    z-index: 21;
-    transform: translateY(-8px);
-    transition: transform 0.2s, box-shadow 0.2s;
-    opacity: 1;
-}
-
-.folder-tab.active {
-    transform: translateY(0);
-    box-shadow: 0 8px 22px rgba(0,0,0,0.14);
-}
-
-.folder-tab .tn { font-size: 9px; opacity: 0.65; }
-.folder-band {
-    width: 100vw;
-    margin-left: calc(-50vw + 50%);
-    height: 48px;
-    display: flex;
+.nav-tab {
+    display: inline-flex;
     align-items: center;
-    padding: 0 24px;
-    gap: 16px;
+    justify-content: center;
     position: relative;
     z-index: 1;
-    margin-top: 0;
-    position: relative;
-}
-.folder-band-text {
-    font-family: 'Unbounded', sans-serif;
-    font-size: clamp(14px, 2vw, 20px);
-    font-weight: 700;
-    color: rgba(0,0,0,0.45);
-    letter-spacing: -0.02em;
-}
-.folder-band-year {
-    margin-left: auto;
+    /* Same bottom padding for every tab so bottoms stay flush with the bar — no downward “lip.” */
+    padding: 9px 18px 9px;
+    border: 1px solid rgba(0, 0, 0, 0.09);
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: rgba(0,0,0,0.35);
-}
-.folder-section {
-    padding: 0;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25) inset;
+    transition:
+        opacity 0.35s var(--theme-blend-ease),
+        padding 0.35s var(--theme-blend-ease),
+        box-shadow 0.35s var(--theme-blend-ease),
+        filter 0.35s var(--theme-blend-ease),
+        background-color var(--theme-blend-duration) var(--theme-blend-ease);
+    -webkit-tap-highlight-color: transparent;
 }
 
-/* topbar shared */
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 40px;
-    border-bottom: 1px solid #D8D6CF;
+.nav-tab:not(.active) {
+    opacity: 0.78;
+    padding-top: 7px;
+    filter: saturate(0.92);
 }
-.topbar-left {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.85);
+
+.nav-tab:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
 }
-.topbar-left.dark { color: var(--gray); }
-.topbar-right {
-    display: flex;
-    gap: 24px;
+
+/* Active tab grows upward only (taller strip), stays level with the header edge — no overlap into the page. */
+.nav-tab.active {
+    z-index: 2;
+    opacity: 1;
+    filter: none;
+    padding: 12px 20px 9px;
+    margin-bottom: 0;
+    box-shadow:
+        0 -1px 0 rgba(255, 255, 255, 0.4) inset,
+        0 1px 2px rgba(0, 0, 0, 0.06);
 }
-.topbar-right span {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.65);
+
+.nav-tab:hover:not(.active) {
+    opacity: 0.92;
+    filter: saturate(1) brightness(1.03);
 }
-.topbar-right span.dark { color: var(--gray); }
-.topbar-link {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: rgba(255,255,255,0.65);
-    text-decoration: none;
-    cursor: pointer;
-    transition: color 0.2s;
+
+#nav-tab-experience {
+    color: #4a3d12;
 }
-.topbar-link:hover {
-    color: rgba(255,255,255,1);
+
+#nav-tab-experience:not(.active) {
+    color: rgba(40, 34, 10, 0.85);
 }
 
 /* big display heading util */
@@ -170,19 +289,18 @@ body {
     color: transparent;
 }
 
+/* Hollow display type: solid fill on the active card only (transparent + compositing can show page green as “stripes”) */
+.site-section--active .outline-text {
+    color: #fdfcfa;
+}
+
 
 /* ══════════════════════════════════
     SECTION 1 — COVER
 ══════════════════════════════════ */
 #cover {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1.5px solid #D8D6CF;
-    overflow: hidden;
     position: relative;
 }
-#cover .topbar { background: var(--tab-green); }
 
 .cover-body {
     flex: 1;
@@ -218,6 +336,10 @@ body {
     letter-spacing: -0.03em;
     -webkit-text-stroke: 2px var(--ink);
     color: transparent;
+}
+
+#cover.site-section--active .cover-name-outline {
+    color: #fdfcfa;
 }
 .cover-name-filled {
     font-family: 'Unbounded', sans-serif;
@@ -282,14 +404,8 @@ body {
     SECTION 2 — ABOUT
 ══════════════════════════════════ */
 #about {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1.5px solid #D8D6CF;
-    overflow: hidden;
     position: relative;
 }
-#about .topbar { background: var(--white); }
 
 .about-body {
     flex: 1;
@@ -400,6 +516,153 @@ body {
     margin-top: 3px;
 }
 
+.github-projects {
+    margin-top: 48px;
+    padding-top: 36px;
+}
+
+.github-projects-header {
+    margin-bottom: 22px;
+}
+
+.github-projects-title {
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 700;
+    font-size: clamp(22px, 3vw, 28px);
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
+}
+
+.github-projects-sub {
+    font-size: 13px;
+    line-height: 1.65;
+    color: #5c5c56;
+    max-width: min(60ch, 100%);
+}
+
+.github-projects-sub code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: #eeebe6;
+    padding: 2px 7px;
+    border-radius: 6px;
+    color: #444;
+    white-space: nowrap;
+}
+
+.github-projects .inline-code,
+.repo-list .inline-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: #eeebe6;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: #333;
+}
+
+.repo-fork-badge {
+    background: #eceae4 !important;
+    color: #666 !important;
+}
+
+.github-projects-footer {
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+}
+
+.github-projects-footer a {
+    color: var(--tab-green);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.github-projects-footer a:hover {
+    text-decoration: underline;
+}
+
+.repo-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+}
+
+.repo-list-status,
+.repo-list-error {
+    grid-column: 1 / -1;
+    font-size: 14px;
+    color: #666;
+}
+
+.repo-list-error {
+    color: #8a3535;
+}
+
+.repo-card {
+    border: 1.5px solid #e8e6e1;
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.72);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.repo-card:hover {
+    border-color: #cfccc4;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.repo-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.repo-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    word-break: break-word;
+}
+
+.repo-name:hover {
+    color: var(--tab-blue);
+    text-decoration: underline;
+}
+
+.repo-stars {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--gray);
+    flex-shrink: 0;
+}
+
+.repo-desc {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: #555;
+    margin-bottom: 12px;
+}
+
+.repo-no-desc {
+    color: #aaa;
+    font-style: italic;
+}
+
+.repo-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.repo-card-meta .chip {
+    font-size: 9px;
+    padding: 3px 8px;
+}
+
 .about-bottom { margin-top: auto; padding-top: 28px; }
 
 
@@ -407,18 +670,21 @@ body {
     SECTION 3 — EXPERIENCE
 ══════════════════════════════════ */
 #experience {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    border-bottom: 1.5px solid #D8D6CF;
-    overflow: hidden;
     position: relative;
 }
-#experience .topbar { background: var(--tab-blue); }
+
+/* Let this card size to its content so Repositories isn’t pushed away by flex-grow gaps. */
+#experience .file-view {
+    min-height: auto;
+}
+
+#experience .exp-body {
+    flex: 0 1 auto;
+}
 
 .exp-body {
     flex: 1;
-    padding: 52px 40px 0;
+    padding: 52px 40px 48px;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -433,7 +699,9 @@ body {
     margin-bottom: 46px;
 }
 
-.exp-entries { flex: 1; }
+.exp-entries {
+    flex: 0 1 auto;
+}
 .exp-entry {
     display: grid;
     grid-template-columns: 210px 1fr;
@@ -442,8 +710,6 @@ body {
     border-top: 1px solid #D8D6CF;
     position: relative;
 }
-.exp-entry:last-child { border-bottom: 1px solid #D8D6CF; }
-
 .exp-left { padding-right: 24px; }
 .exp-company {
     font-family: 'Unbounded', sans-serif;
@@ -465,7 +731,7 @@ body {
     font-weight: 700;
     font-size: 17px;
     line-height: 1.2;
-    margin-bottom: 14px;
+    margin-bottom: 0;
     cursor: pointer;
     transition: color 0.2s, background-color 0.2s;
     padding: 10px 16px;
@@ -476,15 +742,22 @@ body {
     color: var(--tab-blue);
     background-color: rgba(74, 122, 212, 0.12);
 }
+.exp-expand {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.35s ease, max-height 0.4s ease;
+    margin-top: 0;
+}
+.exp-expand .exp-date {
+    margin-bottom: 16px;
+    padding-top: 4px;
+}
 .exp-bullets {
     list-style: none;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s, max-height 0.3s;
 }
 .exp-bullets li {
     font-size: 13.5px;
@@ -507,16 +780,12 @@ body {
     flex-wrap: wrap; 
     gap: 5px; 
     margin-top: 12px;
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    transition: opacity 0.3s, max-height 0.3s;
 }
 
-.exp-entry.expanded .exp-bullets,
-.exp-entry.expanded .exp-tags {
+.exp-entry.expanded .exp-expand {
     opacity: 1;
-    max-height: 1000px;
+    max-height: 2000px;
+    margin-top: 12px;
 }
 
 .exp-num-bg {
@@ -537,13 +806,8 @@ body {
     SECTION 4 — CLOSER
 ══════════════════════════════════ */
 #closer {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
     position: relative;
 }
-#closer .topbar { background: var(--white); }
 
 .closer-body {
     flex: 1;
@@ -662,13 +926,25 @@ body {
     line-height: 1.8;
 }
 
-.closer-bottom { padding: 0 40px; }
-
 @media (max-width: 760px) {
-    .topbar { padding: 12px 20px; }
-    .topbar-right { gap: 12px; }
-    .folder-section { padding: 0 20px; }
-    .cover-body, .about-body, .exp-body, .closer-body { padding: 32px 20px 0; }
+    :root { --site-nav-h: 128px; }
+    .site-nav { padding: 8px 12px 0; }
+    .site-nav-inner { flex-direction: column; align-items: stretch; }
+    .site-nav-brand { padding-bottom: 4px; }
+    .site-nav-tabs { justify-content: flex-start; gap: 3px; }
+    .nav-tab {
+        padding: 8px 12px 8px;
+        font-size: 10px;
+        border-radius: 10px 10px 0 0;
+    }
+    .nav-tab:not(.active) { padding-top: 6px; }
+    .nav-tab.active {
+        padding: 10px 14px 8px;
+    }
+    .site-main { padding: 4px 12px 0; }
+    .file-view { border-radius: 14px; min-height: calc(100svh - var(--site-nav-h) - 28px); }
+    .cover-body, .about-body, .closer-body { padding: 32px 20px 0; }
+    .exp-body { padding: 32px 20px 36px; }
     .cover-info-box { display: none; }
     .about-grid { grid-template-columns: 1fr; }
     .about-photo { aspect-ratio: 4/3; }
@@ -676,6 +952,5 @@ body {
     .exp-left { padding-right: 0; margin-bottom: 10px; }
     .closer-top { grid-template-columns: 1fr; gap: 24px; }
     .contact-grid { grid-template-columns: 1fr; }
-    .closer-bottom { padding: 0 20px; }
     .cover-ghost, .closer-ghost { display: none; }
 }
