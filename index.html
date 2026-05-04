@@ -167,14 +167,13 @@
 
     <div class="github-projects" id="github-projects">
       <div class="github-projects-header">
-        <h3 class="github-projects-title">Repositories</h3>
+        <h3 class="github-projects-title">Recent repositories</h3>
         <p class="github-projects-sub">
-          Recent public work pulled live from the <strong>GitHub REST API</strong>
-          (<code>GET /users/{user}/repos</code>).
+          Loaded from the <strong>GitHub REST API</strong> (<code>GET /users/{username}/repos</code> with <code class="inline-code">sort=updated</code>), newest activity first. Archived repos are omitted.
         </p>
       </div>
       <div id="github-repo-list" class="repo-list" aria-live="polite" aria-busy="true">
-        <p class="repo-list-status">Loading repositories…</p>
+        <p class="repo-list-status">Loading recent repositories…</p>
       </div>
       <p class="github-projects-footer">
         <a id="github-profile-link" href="https://github.com/cassie-phan" target="_blank" rel="noopener noreferrer">View profile on GitHub →</a>
@@ -370,6 +369,9 @@ requestAnimationFrame(() => {
 });
 
 const GITHUB_USERNAME = 'cassie-phan';
+/** How many non-archived repos to show after sorting by last update. */
+const GITHUB_RECENT_REPO_LIMIT = 3;
+
 const REPO_LIST_EL = document.getElementById('github-repo-list');
 const GITHUB_PROFILE_LINK = document.getElementById('github-profile-link');
 
@@ -383,39 +385,35 @@ function escapeHtml(s) {
   return div.innerHTML;
 }
 
+async function fetchRecentRepos() {
+  const params = new URLSearchParams({
+    sort: 'updated',
+    direction: 'desc',
+    per_page: '30',
+    type: 'owner',
+  });
+  const url = `https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}/repos?${params}`;
+  const r = await fetch(url, {
+    headers: { Accept: 'application/vnd.github+json' },
+  });
+  if (r.status === 403) throw new Error('rate limit');
+  if (!r.ok) return [];
+  const repos = await r.json();
+  if (!Array.isArray(repos)) return [];
+  return repos.filter((repo) => !repo.archived).slice(0, GITHUB_RECENT_REPO_LIMIT);
+}
+
 async function loadGithubRepos() {
   if (!REPO_LIST_EL) return;
-  const apiUrl = `https://api.github.com/users/${encodeURIComponent(GITHUB_USERNAME)}/repos?per_page=6&sort=updated`;
 
   try {
-    const response = await fetch(apiUrl, {
-      headers: { Accept: 'application/vnd.github+json' },
-    });
-
-    if (response.status === 403) {
-      throw new Error('rate limit');
-    }
-
-    if (!response.ok) {
-      throw new Error(`GitHub returned ${response.status}`);
-    }
-
-    const data = await response.json();
-    if (!Array.isArray(data)) {
-      throw new Error('unexpected payload');
-    }
-
-    const notArchived = data.filter((r) => !r.archived);
-    let picked = notArchived.filter((r) => !r.fork).slice(0, 3);
-    if (!picked.length && notArchived.length) {
-      picked = notArchived.slice(0, 3);
-    }
+    const picked = await fetchRecentRepos();
 
     REPO_LIST_EL.setAttribute('aria-busy', 'false');
 
     if (!picked.length) {
       REPO_LIST_EL.innerHTML =
-        '<p class="repo-list-status">No public repositories for this username. Set <code class="inline-code">GITHUB_USERNAME</code> in <code class="inline-code">index.html</code> to match your GitHub profile exactly (<strong>cassiephan</strong> and <strong>cassie-phan</strong> are different accounts).</p>';
+        '<p class="repo-list-status">No repositories returned. Check <code class="inline-code">GITHUB_USERNAME</code> in <code class="inline-code">index.html</code>.</p>';
       return;
     }
 
@@ -436,14 +434,14 @@ async function loadGithubRepos() {
           : '';
 
         return `
-          <article class="repo-card">
+          <a class="repo-card" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">
             <div class="repo-card-top">
-              <a class="repo-name" href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${escapeHtml(repo.name)}</a>
+              <span class="repo-name">${escapeHtml(repo.name)}</span>
               ${stars}
             </div>
             <p class="repo-desc">${desc}</p>
             <div class="repo-card-meta">${forkBadge}${lang}</div>
-          </article>
+          </a>
         `;
       })
       .join('');

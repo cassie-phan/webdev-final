@@ -1,18 +1,25 @@
 :root {
     --site-nav-h: 92px;
-    --white: #f7f6f2;
-    --ink: #1C1C1A;
-    --gray: #9A9990;
-    --tab-red: #E05555;
-    --tab-blue: #5b84d1;
-    --tab-green: #6fa66f;
-    --tab-yellow: #e9cc65;
-    --tab-orange: #d98551;
-    --tab-purple: #8B72D4;
-    /* Page + cards: longer ease-in-out reads smoother than short linear snaps */
+    --mother-earth: #513229;
+    --lucky-dice: #f4f1e2;
+    --something-blue: #d8ebf9;
+    --the-bay: #fce6b7;
+    --walking-vinnie: #d7d4b1;
+
+    --white: var(--lucky-dice);
+    --ink: var(--mother-earth);
+    --gray: #7a6a62;
+
+    --tab-green: var(--walking-vinnie);
+    --tab-blue: var(--something-blue);
+    --tab-yellow: var(--the-bay);
+    --tab-orange: var(--mother-earth);
+    --tab-red: #a85c52;
+    --tab-purple: #6b5c7a;
+    --accent-link: #3d5566;
+    --accent-moss: #4f553f;
     --theme-blend-duration: 1.15s;
     --theme-blend-ease: cubic-bezier(0.48, 0.06, 0.32, 0.99);
-    /* Inactive section text/UI: 0 = fully faded out; small value (e.g. 0.15) = faint peek */
     --section-content-dim: 0;
 }
 
@@ -83,38 +90,34 @@ body.theme-closer {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #fdfcfa;
+    background-color: var(--white);
     border: 1.5px solid rgba(255, 255, 255, 0.65);
     border-radius: 20px;
     box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95) inset,
-        0 16px 44px rgba(25, 22, 18, 0.1);
+        0 16px 44px rgba(81, 50, 41, 0.1);
     overflow: hidden;
     min-height: calc(100svh - var(--site-nav-h) - 40px);
-    /* background-color only (not shorthand) — smoother cross-fade with less banding than “background” */
     transition:
         background-color var(--theme-blend-duration) var(--theme-blend-ease),
         box-shadow var(--theme-blend-duration) var(--theme-blend-ease),
         border-color var(--theme-blend-duration) var(--theme-blend-ease);
 }
 
-/* Non-active sections: card reads as page background */
 .site-section--inactive > .file-view {
     background-color: var(--theme-chrome);
     border-color: transparent;
     box-shadow: none;
 }
 
-/* Active card: solid cream */
 .site-section--active > .file-view {
-    background-color: #fdfcfa;
+    background-color: var(--white);
     border-color: rgba(255, 255, 255, 0.65);
     box-shadow:
         0 1px 0 rgba(255, 255, 255, 0.95) inset,
-        0 16px 44px rgba(25, 22, 18, 0.1);
+        0 16px 44px rgba(81, 50, 41, 0.1);
 }
 
-/* Inner content fully fades out / in with the same curve as the card / body */
 .cover-body,
 .about-body,
 .exp-body,
@@ -161,8 +164,8 @@ body.theme-closer {
     z-index: 300;
     padding: 10px 20px 0;
     padding-top: calc(10px + env(safe-area-inset-top, 0));
-    background: #ebe9e4;
-    border-bottom: 1px solid rgba(45, 42, 38, 0.1);
+    background: color-mix(in srgb, var(--walking-vinnie) 35%, var(--lucky-dice));
+    border-bottom: 1px solid rgba(81, 50, 41, 0.1);
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
 }
 
@@ -223,16 +226,16 @@ body.theme-closer {
     letter-spacing: 0.04em;
     padding: 4px 10px;
     border-radius: 100px;
-    background: #E8E6DF;
-    color: #555;
+    background: color-mix(in srgb, var(--walking-vinnie) 55%, var(--lucky-dice));
+    color: var(--ink);
     white-space: nowrap;
 }
-.chip.blue  { background: #C8DCFF; color: #1A4A9A; }
-.chip.green { background: #C8EDCE; color: #1A6B2A; }
-.chip.yellow{ background: #FFF0B0; color: #7A5A00; }
-.chip.red   { background: #FFD4D4; color: #8A1A1A; }
-.chip.purple{ background: #E0D6FF; color: #3A1A8A; }
-.chip.orange{ background: #FFE0CC; color: #8A3A00; }
+.chip.blue  { background: var(--something-blue); color: var(--mother-earth); }
+.chip.green { background: var(--walking-vinnie); color: var(--mother-earth); }
+.chip.yellow{ background: var(--the-bay); color: var(--mother-earth); }
+.chip.red   { background: #f0d4cf; color: #5c2e28; }
+.chip.purple{ background: #e2dce8; color: var(--mother-earth); }
+.chip.orange{ background: color-mix(in srgb, var(--the-bay) 55%, var(--lucky-dice)); color: var(--mother-earth); }
 .chip.dot::before {
     content: '';
     display: block;
@@ -247,7 +250,6 @@ body.theme-closer {
     justify-content: center;
     position: relative;
     z-index: 1;
-    /* Same bottom padding for every tab so bottoms stay flush with the bar — no downward “lip.” */
     padding: 9px 18px 9px;
     border: 1px solid rgba(0, 0, 0, 0.09);
     border-bottom: none;
@@ -255,7 +257,7 @@ body.theme-closer {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
     letter-spacing: 0.02em;
-    color: #fff;
+    color: var(--ink);
     cursor: pointer;
     box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25) inset;
     transition:
@@ -278,7 +280,6 @@ body.theme-closer {
     outline-offset: 2px;
 }
 
-/* Active tab grows upward only (taller strip), stays level with the header edge — no overlap into the page. */
 .nav-tab.active {
     z-index: 2;
     opacity: 1;
@@ -296,14 +297,21 @@ body.theme-closer {
 }
 
 #nav-tab-experience {
-    color: #4a3d12;
+    color: var(--ink);
 }
 
 #nav-tab-experience:not(.active) {
-    color: rgba(40, 34, 10, 0.85);
+    color: rgba(81, 50, 41, 0.88);
 }
 
-/* big display heading util */
+#nav-tab-closer {
+    color: var(--lucky-dice);
+}
+
+#nav-tab-closer:not(.active) {
+    color: rgba(244, 241, 226, 0.88);
+}
+
 .display-heading {
     font-family: 'Unbounded', sans-serif;
     font-weight: 900;
@@ -318,15 +326,10 @@ body.theme-closer {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Hollow display type: solid fill on the active card only (transparent + compositing can show page green as “stripes”) */
 .site-section--active .outline-text {
-    color: #fdfcfa;
+    color: var(--lucky-dice);
 }
 
-
-/* ══════════════════════════════════
-    SECTION 1 — COVER
-══════════════════════════════════ */
 #cover {
     position: relative;
 }
@@ -382,7 +385,7 @@ body.theme-closer {
 }
 
 #cover.site-section--active .cover-name-outline {
-    color: #fdfcfa;
+    color: var(--lucky-dice);
 }
 .cover-name-filled {
     font-family: 'Unbounded', sans-serif;
@@ -397,7 +400,7 @@ body.theme-closer {
     font-family: 'IBM Plex Mono', monospace;
     font-style: italic;
     font-size: clamp(14px, 2vw, 22px);
-    color: var(--tab-blue);
+    color: var(--accent-link);
     margin-top: 14px;
     text-align: left;
 }
@@ -437,7 +440,7 @@ body.theme-closer {
 }
 .cover-info-box p {
     font-size: 11px;
-    color: #666;
+    color: var(--gray);
     line-height: 1.7;
 }
 
@@ -449,10 +452,6 @@ body.theme-closer {
     margin-top: auto;
 }
 
-
-/* ══════════════════════════════════
-    SECTION 2 — ABOUT
-══════════════════════════════════ */
 #about {
     position: relative;
 }
@@ -477,7 +476,7 @@ body.theme-closer {
     font-family: 'IBM Plex Mono', monospace;
     font-style: italic;
     font-size: clamp(14px, 2vw, 20px);
-    color: var(--tab-blue);
+    color: var(--accent-link);
     margin-top: 8px;
 }
 
@@ -493,7 +492,7 @@ body.theme-closer {
     border-radius: 10px;
     overflow: hidden;
     aspect-ratio: 3/4;
-    background: #E5E3DC;
+    background: color-mix(in srgb, var(--walking-vinnie) 45%, var(--lucky-dice));
     position: relative;
     display: flex;
     align-items: center;
@@ -508,7 +507,7 @@ body.theme-closer {
     font-family: 'Unbounded', sans-serif;
     font-weight: 900;
     font-size: 64px;
-    color: rgba(0,0,0,0.1);
+    color: rgba(81, 50, 41, 0.1);
     letter-spacing: -0.04em;
 }
 .about-photo-tag {
@@ -517,7 +516,7 @@ body.theme-closer {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 10px;
     background: var(--ink);
-    color: #fff;
+    color: var(--lucky-dice);
     padding: 4px 10px;
     border-radius: 6px;
 }
@@ -530,14 +529,14 @@ body.theme-closer {
     font-weight: 700;
     line-height: 1.15;
 }
-.about-hi em { font-style: normal; color: var(--tab-green); }
+.about-hi em { font-style: normal; color: var(--accent-moss); }
 
 .about-chips { display: flex; flex-wrap: wrap; gap: 6px; }
 
 .about-bio {
     font-size: 14.5px;
     line-height: 1.8;
-    color: #484844;
+    color: rgba(81, 50, 41, 0.82);
 }
 .about-bio strong { color: var(--ink); font-weight: 600; }
 
@@ -547,7 +546,7 @@ body.theme-closer {
     gap: 10px;
 }
 .about-stat {
-    background: #EDECEA;
+    background: color-mix(in srgb, var(--walking-vinnie) 28%, var(--lucky-dice));
     border-radius: 10px;
     padding: 14px 16px;
 }
@@ -586,17 +585,17 @@ body.theme-closer {
 .github-projects-sub {
     font-size: 13px;
     line-height: 1.65;
-    color: #5c5c56;
+    color: rgba(81, 50, 41, 0.72);
     max-width: min(60ch, 100%);
 }
 
 .github-projects-sub code {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    background: #eeebe6;
+    background: color-mix(in srgb, var(--walking-vinnie) 25%, var(--lucky-dice));
     padding: 2px 7px;
     border-radius: 6px;
-    color: #444;
+    color: var(--ink);
     white-space: nowrap;
 }
 
@@ -604,15 +603,15 @@ body.theme-closer {
 .repo-list .inline-code {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11px;
-    background: #eeebe6;
+    background: color-mix(in srgb, var(--walking-vinnie) 25%, var(--lucky-dice));
     padding: 2px 6px;
     border-radius: 4px;
-    color: #333;
+    color: var(--ink);
 }
 
 .repo-fork-badge {
-    background: #eceae4 !important;
-    color: #666 !important;
+    background: color-mix(in srgb, var(--walking-vinnie) 35%, var(--lucky-dice)) !important;
+    color: var(--gray) !important;
 }
 
 .github-projects-footer {
@@ -622,7 +621,7 @@ body.theme-closer {
 }
 
 .github-projects-footer a {
-    color: var(--tab-green);
+    color: var(--accent-link);
     font-weight: 500;
     text-decoration: none;
 }
@@ -641,24 +640,32 @@ body.theme-closer {
 .repo-list-error {
     grid-column: 1 / -1;
     font-size: 14px;
-    color: #666;
+    color: var(--gray);
 }
 
 .repo-list-error {
     color: #8a3535;
 }
 
-.repo-card {
-    border: 1.5px solid #e8e6e1;
+a.repo-card {
+    display: block;
+    border: 1.5px solid rgba(81, 50, 41, 0.12);
     border-radius: 12px;
     padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.72);
+    background: color-mix(in srgb, var(--lucky-dice) 90%, white);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
-.repo-card:hover {
-    border-color: #cfccc4;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+a.repo-card:hover {
+    border-color: rgba(81, 50, 41, 0.22);
+    box-shadow: 0 8px 24px rgba(81, 50, 41, 0.08);
+}
+
+a.repo-card:focus-visible {
+    outline: 2px solid var(--accent-link);
+    outline-offset: 2px;
 }
 
 .repo-card-top {
@@ -678,8 +685,8 @@ body.theme-closer {
     word-break: break-word;
 }
 
-.repo-name:hover {
-    color: var(--tab-blue);
+a.repo-card:hover .repo-name {
+    color: var(--accent-link);
     text-decoration: underline;
 }
 
@@ -693,12 +700,12 @@ body.theme-closer {
 .repo-desc {
     font-size: 13.5px;
     line-height: 1.55;
-    color: #555;
+    color: rgba(81, 50, 41, 0.75);
     margin-bottom: 12px;
 }
 
 .repo-no-desc {
-    color: #aaa;
+    color: rgba(81, 50, 41, 0.38);
     font-style: italic;
 }
 
@@ -715,15 +722,10 @@ body.theme-closer {
 
 .about-bottom { margin-top: auto; padding-top: 28px; }
 
-
-/* ══════════════════════════════════
-    SECTION 3 — EXPERIENCE
-══════════════════════════════════ */
 #experience {
     position: relative;
 }
 
-/* Let this card size to its content so Repositories isn’t pushed away by flex-grow gaps. */
 #experience .file-view {
     min-height: auto;
 }
@@ -759,14 +761,13 @@ body.theme-closer {
     grid-template-columns: 210px 1fr;
     gap: 0;
     padding: 28px 0;
-    border-top: 1px solid #D8D6CF;
+    border-top: 1px solid rgba(81, 50, 41, 0.14);
     position: relative;
     --exp-role-pad-x: 16px;
     --exp-watermark-gutter: 2.75rem; /* right column inset so “01” doesn’t sit on the title pill */
 }
 .exp-left { padding-right: 24px; }
 
-/* Role column: same left/right inset as title pill so dates & bullets line up */
 .exp-entry > div:last-child {
     text-align: left;
     min-width: 0;
@@ -806,13 +807,13 @@ body.theme-closer {
     vertical-align: top;
 }
 .exp-role:hover {
-    color: var(--tab-blue);
-    background-color: rgba(74, 122, 212, 0.12);
+    color: var(--accent-link);
+    background-color: color-mix(in srgb, var(--something-blue) 40%, transparent);
 }
 
 .exp-entry.expanded .exp-role {
-    color: var(--tab-blue);
-    background-color: rgba(74, 122, 212, 0.12);
+    color: var(--accent-link);
+    background-color: color-mix(in srgb, var(--something-blue) 45%, transparent);
 }
 .exp-expand {
     opacity: 0;
@@ -836,13 +837,13 @@ body.theme-closer {
 .exp-bullets li {
     font-size: 13.5px;
     line-height: 1.8;
-    color: #4A4A48;
+    color: rgba(81, 50, 41, 0.78);
     position: relative;
     padding-left: 24px;
 }
 .exp-bullets li::before {
     content: '→';
-    color: var(--tab-blue);
+    color: var(--accent-link);
     position: absolute;
     left: 0;
     top: 2px;
@@ -869,7 +870,7 @@ body.theme-closer {
     font-family: 'Unbounded', sans-serif;
     font-size: 52px;
     font-weight: 900;
-    color: rgba(0,0,0,0.04);
+    color: rgba(81, 50, 41, 0.06);
     line-height: 1;
     user-select: none;
     pointer-events: none;
@@ -877,10 +878,6 @@ body.theme-closer {
 
 .exp-bottom { margin-top: auto; padding-top: 20px; }
 
-
-/* ══════════════════════════════════
-    SECTION 4 — CLOSER
-══════════════════════════════════ */
 #closer {
     position: relative;
 }
@@ -900,7 +897,7 @@ body.theme-closer {
     font-family: 'Unbounded', sans-serif;
     font-weight: 900;
     font-size: clamp(100px, 20vw, 240px);
-    -webkit-text-stroke: 1px rgba(0,0,0,0.05);
+    -webkit-text-stroke: 1px rgba(81, 50, 41, 0.08);
     color: transparent;
     letter-spacing: -0.04em;
     pointer-events: none;
@@ -925,7 +922,7 @@ body.theme-closer {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
-.closer-heading .accent { color: var(--tab-green); }
+.closer-heading .accent { color: var(--accent-moss); }
 
 .closer-side-label {
     font-family: 'IBM Plex Mono', monospace;
@@ -939,7 +936,7 @@ body.theme-closer {
 .closer-side-text {
     font-size: 14px;
     line-height: 1.75;
-    color: #555;
+    color: rgba(81, 50, 41, 0.75);
 }
 .closer-side-text strong { color: var(--ink); }
 
@@ -950,7 +947,7 @@ body.theme-closer {
     margin-bottom: 48px;
 }
 .contact-card {
-    border: 1.5px solid #D8D6CF;
+    border: 1.5px solid rgba(81, 50, 41, 0.14);
     border-radius: 12px;
     padding: 20px;
     text-decoration: none;
@@ -976,7 +973,7 @@ body.theme-closer {
 .contact-arrow {
     margin-top: 12px;
     font-size: 18px;
-    color: var(--tab-blue);
+    color: var(--accent-link);
 }
 
 .closer-footer-strip {
@@ -984,7 +981,7 @@ body.theme-closer {
     justify-content: space-between;
     align-items: flex-end;
     padding-top: 28px;
-    border-top: 1px solid #D8D6CF;
+    border-top: 1px solid rgba(81, 50, 41, 0.14);
     margin-top: auto;
 }
 .closer-footer-name {
